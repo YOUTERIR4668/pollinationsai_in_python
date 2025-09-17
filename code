@@ -1,0 +1,29 @@
+ture = True
+
+while ture:
+    import requests
+    import urllib.parse
+
+    def generate_text(prompt):
+        # Strip trailing punctuation and encode the prompt
+        cleaned_prompt = prompt.strip().rstrip(".!?")
+        encoded_prompt = urllib.parse.quote(cleaned_prompt)
+    
+        #    Construct the URL properly
+        url = f"https://text.pollinations.ai/{encoded_prompt}"
+
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            print("Generated Text:\n", response.text)
+        except requests.exceptions.RequestException as e:
+            print("Error during request:", e)
+
+    # Example usage
+    inputttyy = input("enter prompt: ")
+    if inputttyy == 'break':
+        ture = False    
+    else:
+        print(generate_text(f"""
+                        {inputttyy}"""))
+
